@@ -1,0 +1,20 @@
+@baseUrl = http://localhost:3000
+
+### Read all films with File variable
+
+GET {{baseUrl}}/films?minimum-duration=100
+
+### Read one film with id
+
+GET {{baseUrl}}/films/2
+
+### Create a pizza
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title":"Magic Green",
+    "duration" : 180,
+    "budget" : 200,
+    "link" : "hviurnvjrojo"
+}
