@@ -1,11 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var app = express();
 
-app.use((req, res, next) => {
-  console.log('Time:', Date.now());
-  next();
-});
 
 const films = [
   {
@@ -15,7 +10,7 @@ const films = [
     id : 2, title : "BatMan", duration : 120, budget : 200, link : "hviurnvjrojo"
   },
   {
-    id : 3, title : "IronMan", duration : 120, budget : 200, link : "hviurnvjrojo"
+    id : 3, title : "Hulk", duration : 120, budget : 200, link : "hviurnvjrojo"
   }
 ]
 

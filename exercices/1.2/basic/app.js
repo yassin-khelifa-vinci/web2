@@ -13,6 +13,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+let reqCounter = {};
+
+app.use((req, res, next) => {
+    console.log('here')
+    let method = req.method + ' ' + req.path;
+    if (reqCounter[method] === undefined)
+      reqCounter[method] = 1;
+    else
+    reqCounter[method] += 1;
+    console.log('Request counter :\n', reqCounter)
+    next();
+  });
+
 app.use('/films', filmRouter);
 app.use('/users', usersRouter);
 
