@@ -70,4 +70,67 @@ router.post('/', (req, res) => {
   res.json(newFilm);
 });
 
+router.delete('/:id', (req, res) => {
+
+  if (isNaN(parseInt(req.params.id))) return res.sendStatus(400);
+  const indexFilm = films.findIndex((film) => film.id == req.params.id);
+  if (indexFilm < 0) return res.sendStatus(404);
+  const itemRemoved = films.splice(indexFilm, 1);
+  res.json(itemRemoved[0])
+});
+
+router.patch('/:id', (req, res) => {
+  if (isNaN(parseInt(req.params.id))) return res.sendStatus(400);
+
+  const title = req?.body?.title;
+  const duration = req?.body?.duration;
+  const budget = req?.body?.budget;
+  const link = req?.body?.link;
+
+  console.log(title?.length === 0)
+
+  if ((!title && !duration && !budget && !link) || title?.length === 0 || duration <= 0 || budget <= 0 || link?.length === 0) return res.sendStatus(400);
+
+  const foundIndex = films.findIndex((film) => film.id == req.params.id);
+
+  if (foundIndex < 0) return res.sendStatus(404);
+
+  const itemUpdated = {...films[foundIndex], ...req.body};
+  films[foundIndex] = itemUpdated;
+  res.json(itemUpdated)
+});
+
+router.put('/:id', (req, res) => {
+  if (isNaN(parseInt(req.params.id))) return res.sendStatus(400);
+
+  const title = req?.body?.title;
+  const duration = req?.body?.duration;
+  const budget = req?.body?.budget;
+  const link = req?.body?.link;
+
+  console.log(title?.length === 0)
+
+  if ((!title && !duration && !budget && !link) || title === undefined || title?.length === 0 || duration === undefined || duration <= 0 || budget === undefined || budget <= 0 || link === undefined || link?.length === 0) return res.sendStatus(400);
+
+  const foundIndex = films.findIndex((film) => film.id == req.params.id);
+
+  let item;
+
+  if (foundIndex < 0){
+    item = {
+      id: films.length + 1,
+      title: title,
+      duration: duration,
+      budget: budget,
+      link: link
+    };
+    films.push(item)
+  } 
+  else{
+  item = {...films[foundIndex], ...req.body};
+  films[foundIndex] = item;
+  }
+  res.json(item)
+});
+
 module.exports = router;
