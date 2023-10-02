@@ -1,0 +1,45 @@
+@baseUrl = http://localhost:3000
+
+### Read all films with File variable
+
+GET {{baseUrl}}/films?minimum-duration=150
+
+### Read one film with id
+
+GET {{baseUrl}}/films/2
+
+### Create a pizza
+POST {{baseUrl}}/films
+Content-Type: application/json
+
+{
+    "title":"Magic Red",
+    "duration" : 180,
+    "budget" : 500,
+    "link" : "ohoui"
+}
+
+### Delete film identified by 2
+DELETE {{baseUrl}}/films/2
+
+### Update film with one or more property
+PATCH {{baseUrl}}/films/1
+Content-Type: application/json
+
+{
+    "title":"Magic Green",
+    "duration" : 200,
+    "budget" : 2,
+    "link" : "hviurnvjrojo"
+}
+
+### Update film with one or more property
+PUT  {{baseUrl}}/films/10
+Content-Type: application/json
+
+{
+    "title":"oui oui",
+    "duration" : 3,
+    "budget" : 2,
+    "link" : "hviurnvjrojo"
+}
